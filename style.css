@@ -175,7 +175,7 @@ nav ul li a {
     padding-bottom: 5px;
 }
 
-/* SEÇÃO PORTFÓLIO (GALERIA) */
+/* SEÇÃO PORTFÓLIO (GALERIA) - AJUSTADO PARA IMAGENS COM LINK E OVERLAY */
 .gallery-section {
     padding: 80px 0;
     background-color: white;
@@ -188,16 +188,59 @@ nav ul li a {
 }
 
 .portfolio-item {
-    background-color: #eee;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #666;
-    font-weight: 700;
+    /* Manter o layout base, mas o link é o container */
+    background-color: #eee; /* Cor de fundo aparecerá se a imagem não carregar */
+    height: 250px; /* Altura fixa para o bloco da imagem */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s;
+    position: relative; /* Para posicionar o texto/overlay */
+    display: block; /* Ocupa o espaço da grid */
+    overflow: hidden; /* **IMPORTANTE:** Corta o que estiver fora da borda do item */
+    text-decoration: none; /* Remover sublinhado do link */
+    color: white; /* Cor do texto padrão (será branco por causa do overlay) */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+/* Garante que a imagem preencha todo o espaço do bloco */
+.portfolio-item img {
+    width: 100%; /* **NOVO/ALTERADO:** Garante que a imagem ocupe 100% da largura do contêiner */
+    height: 100%; /* **NOVO/ALTERADO:** Garante que a imagem ocupe 100% da altura do contêiner */
+    object-fit: cover; /* **NOVO/ALTERADO:** Garante que a imagem cubra o item sem distorcer, cortando as bordas se necessário */
+    transition: transform 0.3s;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05); /* Efeito sutil de zoom ao passar o mouse */
+}
+
+/* Estilo para a legenda que fica por cima (Overlay) */
+.portfolio-overlay-text {
+    position: absolute;
+    bottom: 0; /* Posição na parte inferior */
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.1em;
+    /* Adicionado para garantir que o texto não "escape" */
+    white-space: nowrap; /* Evita quebras de linha para o texto */
+    overflow: hidden; /* Esconde texto que exceder */
+    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+}
+
+.portfolio-link-note {
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+    color: #666;
 }
 
 .portfolio-item:hover {
